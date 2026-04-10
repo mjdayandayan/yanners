@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Happy Birthday!</title>
+  <title>Happy Birthday Yana!</title>
+
   <style>
     body {
       margin: 0;
@@ -10,22 +11,17 @@
       text-align: center;
       background: linear-gradient(to right, #ff9a9e, #fad0c4);
       color: white;
+      overflow: hidden;
     }
+
     .container {
       padding: 50px;
     }
+
     h1 {
       font-size: 3em;
     }
-    .heart {
-      font-size: 2em;
-      animation: float 2s infinite;
-    }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
+
     button {
       padding: 15px 25px;
       font-size: 16px;
@@ -35,34 +31,52 @@
       color: #ff6f91;
       cursor: pointer;
     }
-    #message {
-      display: none;
+
+    #typing {
       margin-top: 20px;
       font-size: 1.5em;
+      min-height: 60px;
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>Happy Birthday, [HER NAME]! 🎉</h1>
-  <p>You make life brighter just by being in it 💖</p>
+  <h1>Happy Birthday, Yanners!</h1>
 
-  <button onclick="showMessage()">Click for a surprise 🎁</button>
+  <button onclick="startSurprise()">Click this babe</button>
 
-  <div id="message">
-    <p>
-      Thank you for being such an amazing person.  
-      I hope your day is filled with happiness and love 💕  
-      You deserve the world!
-    </p>
-    <div class="heart">💖💖💖</div>
-  </div>
+  <div id="typing"></div>
 </div>
 
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-function showMessage() {
-  document.getElementById("message").style.display = "block";
+const message = "My wife, you're still as beautiful as the day I met you. Happy bornday babydoll and enjoy your day mwah <3";
+
+let i = 0;
+
+function typeWriter() {
+  if (i < message.length) {
+    document.getElementById("typing").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeWriter, 50);
+  }
+}
+
+function startSurprise() {
+  document.getElementById("typing").innerHTML = "";
+  i = 0;
+  typeWriter();
+
+  // Play music (fix for browsers that block autoplay)
+  const music = document.getElementById("bgMusic");
+  music.play().catch(() => {
+    console.log("Autoplay blocked until user interaction");
+  });
 }
 </script>
 
